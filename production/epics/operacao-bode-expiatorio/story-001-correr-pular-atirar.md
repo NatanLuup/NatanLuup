@@ -1,12 +1,12 @@
 # Story 001: Correr, pular e atirar
 
 > **Epic**: Operação Bode Expiatório
-> **Status**: Ready
+> **Status**: In Progress
 > **Layer**: Foundation
 > **Type**: Visual/Feel
 > **Estimate**: M
 > **Manifest Version**: N/A (minimal — no control manifest)
-> **Last Updated**: [set by /dev-story when implementation begins]
+> **Last Updated**: 2026-11-09
 
 ## Context
 
@@ -54,10 +54,15 @@
 
 ## Files
 
-- `src/gameplay/player/player.gd`, `src/gameplay/player/player.tscn`
-- `src/gameplay/weapons/bullet.gd`, `src/gameplay/weapons/bullet.tscn`
-- `assets/data/player.json` (ou recurso `.tres`)
+- `src/gameplay/player/player.gd`
+- `src/gameplay/player/player.tscn`
+- `src/gameplay/player/player_stats.gd`
+- `assets/data/player_stats.tres`
+- `src/gameplay/weapons/bullet.gd`
+- `src/gameplay/weapons/bullet.tscn`
+- `src/core/input_actions.gd`
 - `src/levels/test_arena.tscn`
+- `project.godot` (main scene, 1280x720 viewport)
 
 ---
 
