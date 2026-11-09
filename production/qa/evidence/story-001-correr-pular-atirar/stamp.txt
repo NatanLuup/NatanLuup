@@ -1,0 +1,9 @@
+Reviewed-Content-Hash: src/gameplay/player/player.gd ed309dfb88b0c0ac7176f78a7bc4f88db76aa17f
+Reviewed-Content-Hash: src/gameplay/player/player.tscn d0400b877506a5ea7847e874ed8df37c1cf3483d
+Reviewed-Content-Hash: src/gameplay/player/player_stats.gd fb88a8f8409fac63e4cc61829786471f81f433b8
+Reviewed-Content-Hash: assets/data/player_stats.tres 504fecd057eb5ea6be023b64428c7afa503c64d0
+Reviewed-Content-Hash: src/gameplay/weapons/bullet.gd 17fd45a7ab7b8c247fc5c183a5e60a647e2789f8
+Reviewed-Content-Hash: src/gameplay/weapons/bullet.tscn adc8d2bf6546ab5844b80712bec69fd9668c53e2
+Reviewed-Content-Hash: src/core/input_actions.gd e5fd56f675c90a3a959df0aef02da0ff4a084964
+Reviewed-Content-Hash: src/levels/test_arena.tscn d2c66c94c6f60f515077c12aaf91ad3e67752272
+Reviewed-Content-Hash: project.godot c64ac983ab50574bcf206356c03caac7a9a480bf

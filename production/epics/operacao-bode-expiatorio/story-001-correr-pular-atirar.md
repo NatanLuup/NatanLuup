@@ -1,7 +1,7 @@
 # Story 001: Correr, pular e atirar
 
 > **Epic**: Operação Bode Expiatório
-> **Status**: In Progress
+> **Status**: Complete
 > **Layer**: Foundation
 > **Type**: Visual/Feel
 > **Estimate**: M
@@ -85,3 +85,12 @@
 
 - Depends on: None
 - Unlocks: `production/epics/operacao-bode-expiatorio/story-002-coop-online.md`, `production/epics/operacao-bode-expiatorio/story-003-inimigos.md`
+
+---
+
+## Completion Notes
+**Completed**: 2026-11-09
+**Criteria**: 7/7 accepted by the developer (AC-3 shooting asserted without a screenshot of bullets; AC-5 tested on keyboard only, gamepad untested; AC-7 screenshot shows the player, not a shot in flight)
+**Deviations**: Closed by the developer's choice ("Close anyway") with the AC-3/AC-5/AC-7 gaps above
+**Test Evidence**: `production/qa/evidence/story-001-correr-pular-atirar/arena-parado.png`, sign-off in `production/qa/evidence/story-001-correr-pular-atirar-evidence.md`
+**Reviewed by**: self, no independent review
