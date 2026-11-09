@@ -1,12 +1,12 @@
 # Story 002: Co-op online para 2 jogadores
 
 > **Epic**: Operação Bode Expiatório
-> **Status**: Ready
+> **Status**: In Progress
 > **Layer**: Foundation
 > **Type**: Integration
 > **Estimate**: L
 > **Manifest Version**: N/A (minimal — no control manifest)
-> **Last Updated**: [set by /dev-story when implementation begins]
+> **Last Updated**: 2026-11-09
 
 ## Context
 
@@ -39,7 +39,7 @@
 
 ## Implementation Notes
 
-- **Decisão em aberto, tomar no início do `/dev-story`:** como os dois PCs se encontram pela internet. Opções: conexão direta por IP (simples; quem hospeda costuma precisar abrir uma porta no roteador) ou um serviço intermediário (relay) que permite entrar com um código curto. O brief diz "código"; confirmar com o usuário antes de implementar
+- **Decisão (2026-11-09, usuário):** conexão por **IP direto** (ENet), sem servidor intermediário. Quem hospeda passa o IP; o amigo digita e entra. Se o roteador bloquear, os jogadores usam uma rede virtual (Radmin VPN, ZeroTier, Tailscale). Entrar por código curto fica para depois. Isso substitui o "entra com um código" do brief para o MVP
 - Usar a API de multiplayer de alto nível do Godot; checar `docs/engine-reference/godot/` antes de citar qualquer API
 
 ---
@@ -53,10 +53,14 @@
 
 ## Files
 
-- `src/networking/lobby.gd`, `src/networking/lobby.tscn`
-- `src/networking/network_manager.gd`
-- `src/gameplay/player/player.gd` (sincronização)
-- `production/qa/playtest-coop-online.md`
+- `src/networking/network_session.gd`
+- `src/networking/lobby.gd`
+- `src/networking/lobby.tscn`
+- `src/levels/test_arena.gd`
+- `src/levels/test_arena.tscn` (players now spawned by the host)
+- `src/gameplay/player/player.gd` (authority, bullets via RPC)
+- `src/gameplay/player/player.tscn` (MultiplayerSynchronizer)
+- `project.godot` (main scene is now the lobby)
 
 ---
 
