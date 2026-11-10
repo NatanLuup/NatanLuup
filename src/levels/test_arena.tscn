@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene format=3 uid="uid://8kdt63uajpst"]
 
-[ext_resource type="Script" path="res://src/levels/test_arena.gd" id="1_arena"]
+[ext_resource type="PackedScene" path="res://src/networking/lobby.tscn" id="1_lobby"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(1280, 40)
@@ -8,47 +8,47 @@ size = Vector2(1280, 40)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
 size = Vector2(240, 20)
 
-[node name="TestArena" type="Node2D"]
-script = ExtResource("1_arena")
+[node name="TestArena" type="Node2D" unique_id=885553031]
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=163157398]
 offset_right = 1280.0
 offset_bottom = 720.0
 color = Color(0.55, 0.75, 0.9, 1)
 
-[node name="Ground" type="StaticBody2D" parent="."]
+[node name="Ground" type="StaticBody2D" parent="." unique_id=711286548]
 position = Vector2(640, 700)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=571378387]
 shape = SubResource("RectangleShape2D_ground")
 
-[node name="Visual" type="Polygon2D" parent="Ground"]
+[node name="Visual" type="Polygon2D" parent="Ground" unique_id=286903869]
 color = Color(0.45, 0.35, 0.25, 1)
 polygon = PackedVector2Array(-640, -20, 640, -20, 640, 20, -640, 20)
 
-[node name="Platform" type="StaticBody2D" parent="."]
+[node name="Platform" type="StaticBody2D" parent="." unique_id=2131218477]
 position = Vector2(800, 560)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform" unique_id=591025770]
 shape = SubResource("RectangleShape2D_platform")
 
-[node name="Visual" type="Polygon2D" parent="Platform"]
+[node name="Visual" type="Polygon2D" parent="Platform" unique_id=1017938613]
 color = Color(0.45, 0.35, 0.25, 1)
 polygon = PackedVector2Array(-120, -10, 120, -10, 120, 10, -120, 10)
 
-[node name="Players" type="Node2D" parent="."]
+[node name="SpawnPoints" type="Node2D" parent="."]
 
-[node name="Projectiles" type="Node2D" parent="."]
+[node name="HostSpawn" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(200, 640)
+
+[node name="GuestSpawn" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(300, 640)
+
+[node name="Players" type="Node2D" parent="."]
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("../Players")
 
-[node name="Hud" type="CanvasLayer" parent="."]
-
-[node name="NoticeLabel" type="Label" parent="Hud"]
-unique_name_in_owner = true
-visible = false
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 620.0
-offset_bottom = 60.0
+[node name="Lobby" parent="." instance=ExtResource("1_lobby")]
+players_path = NodePath("../Players")
+spawner_path = NodePath("../PlayerSpawner")
+spawn_points_path = NodePath("../SpawnPoints")
