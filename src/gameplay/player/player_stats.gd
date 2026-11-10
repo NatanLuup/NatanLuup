@@ -18,3 +18,5 @@ extends Resource
 @export var muzzle_offset: Vector2 = Vector2(22.0, -6.0)
 ## How far above the player's origin an upward shot spawns, in pixels.
 @export var muzzle_up_offset: float = 28.0
+## Body color of the guest in online co-op, so the two players can be told apart.
+@export var guest_color: Color = Color(0.75, 0.3, 0.2, 1.0)

@@ -1,60 +1,85 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://src/networking/lobby.gd" id="1_lobby"]
-[ext_resource type="Script" path="res://src/networking/network_session.gd" id="2_session"]
+[ext_resource type="Script" path="res://src/networking/network_manager.gd" id="2_network"]
+[ext_resource type="Resource" path="res://assets/data/network_config.tres" id="3_config"]
 
-[node name="Lobby" type="Node"]
+[node name="Lobby" type="CanvasLayer"]
 script = ExtResource("1_lobby")
 
-[node name="NetworkSession" type="Node" parent="."]
-script = ExtResource("2_session")
+[node name="NetworkManager" type="Node" parent="."]
+script = ExtResource("2_network")
+config = ExtResource("3_config")
 
-[node name="World" type="Node" parent="."]
-
-[node name="Menu" type="CanvasLayer" parent="."]
-
-[node name="Panel" type="PanelContainer" parent="Menu"]
+[node name="Menu" type="PanelContainer" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -260.0
-offset_top = -170.0
-offset_right = 260.0
-offset_bottom = 170.0
+offset_left = -220.0
+offset_top = -130.0
+offset_right = 220.0
+offset_bottom = 130.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Box" type="VBoxContainer" parent="Menu/Panel"]
-layout_mode = 2
+[node name="Layout" type="VBoxContainer" parent="Menu"]
+theme_override_constants/separation = 12
 
-[node name="Title" type="Label" parent="Menu/Panel/Box"]
-layout_mode = 2
+[node name="Title" type="Label" parent="Menu/Layout"]
 text = "Operação Bode Expiatório"
 horizontal_alignment = 1
 
-[node name="HostButton" type="Button" parent="Menu/Panel/Box"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Hospedar partida"
+[node name="HostButton" type="Button" parent="Menu/Layout"]
+text = "Hospedar"
 
-[node name="AddressEdit" type="LineEdit" parent="Menu/Panel/Box"]
-unique_name_in_owner = true
-layout_mode = 2
-placeholder_text = "IP do amigo (ex.: 192.168.0.10)"
+[node name="AddressEdit" type="LineEdit" parent="Menu/Layout"]
+text = "127.0.0.1"
+placeholder_text = "IP de quem hospeda"
+alignment = 1
 
-[node name="JoinButton" type="Button" parent="Menu/Panel/Box"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Entrar na partida"
+[node name="JoinButton" type="Button" parent="Menu/Layout"]
+text = "Entrar"
 
-[node name="AddressesLabel" type="Label" parent="Menu/Panel/Box"]
-unique_name_in_owner = true
-layout_mode = 2
+[node name="StatusLabel" type="Label" parent="Menu/Layout"]
+custom_minimum_size = Vector2(400, 48)
+horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="StatusLabel" type="Label" parent="Menu/Panel/Box"]
-unique_name_in_owner = true
-layout_mode = 2
-autowrap_mode = 3
+[node name="Hud" type="Control" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="InfoLabel" type="Label" parent="Hud"]
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 960.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0.1, 0.1, 0.15, 1)
+
+[node name="NoticeLabel" type="Label" parent="Hud"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 70.0
+offset_bottom = 110.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.7, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="LeaveButton" type="Button" parent="Hud"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -96.0
+offset_top = 10.0
+offset_right = -16.0
+offset_bottom = 41.0
+grow_horizontal = 0
+focus_mode = 0
+text = "Sair"

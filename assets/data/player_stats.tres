@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="PlayerStats" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="PlayerStats" format=3 uid="uid://tbf2hbnbyfwp"]
 
-[ext_resource type="Script" path="res://src/gameplay/player/player_stats.gd" id="1_stats"]
+[ext_resource type="Script" uid="uid://cuk3j672rksfx" path="res://src/gameplay/player/player_stats.gd" id="1_stats"]
 
 [resource]
 script = ExtResource("1_stats")
@@ -11,3 +11,4 @@ fire_interval = 0.15
 bullet_speed = 900.0
 muzzle_offset = Vector2(22, -6)
 muzzle_up_offset = 28.0
+guest_color = Color(0.75, 0.3, 0.2, 1)

@@ -1,61 +1,47 @@
-# Test Evidence: Correr, pular e atirar
+# Evidência: Story 001, Correr, pular e atirar
 
-> **Story**: `production/epics/operacao-bode-expiatorio/story-001-correr-pular-atirar.md`
-> **Story Type**: Visual/Feel
-> **Date**: 2026-11-09
-> **Tester**: NatanLuup
-> **Build / Commit**: 0509720
+**Story**: `production/epics/operacao-bode-expiatorio/story-001-correr-pular-atirar.md`
+**Tipo**: Visual/Feel
+**Data**: 2026-11-09
+**Build**: Godot 4.7.2.stable.official.ed1daf0bf, janela 1280x720, Forward+
 
----
+## Como foi verificado
 
-## What Was Tested
+A cena real (`src/levels/test_arena.tscn`) rodou em janela com um harness descartável, fora do
+projeto, que injetou eventos de teclado e gamepad pelo `Input` e mediu o resultado. Foram 22
+verificações, todas aprovadas. `commands.run` também abriu o jogo e saiu sem erro.
 
-The player character in the test arena: running, jumping on the ground, shooting sideways and upward, launched with F5 in Godot 4.7.2 on the developer's Windows machine.
+| Critério | Resultado medido |
+|---|---|
+| Corre para os dois lados | +110,0 px e -110,0 px em 30 frames (220 px/s) |
+| Pula só no chão | Subiu 58,5 px; no ar, novo pulo não reiniciou a velocidade (-356,7 para -263,3) |
+| Tiro em 3 direções e some fora da tela | Velocidades (900, 0), (-900, 0) e (0, -900); todos os projéteis foram removidos |
+| Valores vêm de arquivo de dados | Dobrar `run_speed` no resource dobrou a distância (146,7 px em 20 frames); 6 tiros em 60 frames com `fire_interval` 0,15 |
+| Teclado e gamepad | Analógico, D-pad, botão A, botão X e mira no analógico responderam |
+| Cena principal abre com `run` | `run/main_scene` aponta para `test_arena.tscn` |
 
-**Acceptance criteria covered**: AC-1 to AC-7
+## Screenshots
 
----
+- `story-001-correr-pular-atirar/01-personagem-atirando-direita.png`: personagem no chão, três projéteis para a direita
+- `story-001-correr-pular-atirar/02-personagem-atirando-cima.png`: personagem no chão, três projéteis para cima
 
-## Acceptance Criteria Results
+## Limites desta verificação
 
-| # | Criterion (from story) | Result | Notes |
-|---|----------------------|--------|-------|
-| AC-1 | Corre para a esquerda e para a direita | PASS | Confirmed by the tester |
-| AC-2 | Pula só quando está no chão | PASS | Confirmed by the tester ("está pulando certinho") |
-| AC-3 | Atira para os lados e para cima; projéteis somem fora da tela | PASS (asserted) | Confirmed by the tester; no screenshot with bullets retained |
-| AC-4 | Valores vêm de arquivo de dados | PASS | `assets/data/player_stats.tres` |
-| AC-5 | Funciona no gamepad e no teclado | PASS (keyboard only) | Gamepad not tested |
-| AC-6 | A cena de teste é a cena principal | PASS | F5 opened the arena — see screenshot 1 |
-| AC-7 | Screenshot do personagem atirando salvo | PARTIAL | Retained screenshot shows the arena and player, not a shot in flight |
+- **Gamepad físico não testado:** os eventos de gamepad foram simulados e passaram pelo Input Map real.
+- **Sensação de controle não avaliada:** "controle gostoso" depende de alguém jogar. Um still e um script não medem isso.
 
----
+## Observações
 
-## Screenshots / Video
-
-| # | Filename | What It Shows | Acceptance Criterion |
-|---|----------|--------------|----------------------|
-| 1 | `story-001-correr-pular-atirar/arena-parado.png` | Test arena running: sky, ground, platform, green player standing with gun facing right | AC-6, AC-7 (partial) |
-
----
-
-## Test Conditions
-
-- **Game state at start**: fresh launch of the test arena
-- **Platform / hardware**: Windows, Godot 4.7.2
-- **Framerate during test**: not measured
-- **Any special setup required**: none
-
----
-
-## Observations
-
-- Feel approved by the tester ("Está bom").
-- Closed by the developer's choice without a screenshot of bullets in flight and without a gamepad test; both remain open checks.
-
----
+- A arma não aponta para cima ao mirar para cima (só o projétil muda). A arte atual é provisória.
 
 ## Sign-Off
 
 | Role | Name | Date | Signature |
 |------|------|------|-----------|
-| Lead (art-director / designer) | NatanLuup | 2026-11-09 | [x] Approved |
+| Lead (art-director / designer) | Dono do projeto | 2026-11-09 | [x] Approved |
+
+Aprovação dada no chat ("pode fechar o Story 1"), antes de os screenshots serem mostrados.
+
+---
+
+*Template: `.claude/docs/templates/test-evidence.md`*

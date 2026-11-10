@@ -1,31 +1,30 @@
-## Player character: runs, jumps and shoots. In co-op, each player is controlled
-## only by the peer whose id is the node's name; the others see it through the
-## MultiplayerSynchronizer.
+## Player character: runs, jumps and shoots. In online co-op each peer controls
+## only the player named after its own peer id; the other one mirrors the network.
 ## Implements design/game-brief.md MVP features 1 and 2 (Stories 001 and 002).
 class_name Player
 extends CharacterBody2D
 
 const BULLET_SCENE: PackedScene = preload("res://src/gameplay/weapons/bullet.tscn")
+const HOST_PEER_ID: int = 1
 
 ## Tuning values. The scene assigns assets/data/player_stats.tres.
 @export var stats: PlayerStats
-
-## Where this player's bullets are added. Set by the arena when the player spawns.
-var projectile_parent: Node
 
 var _facing: float = 1.0
 var _shot_cooldown: float = 0.0
 
 @onready var _visual: Node2D = $Visual
+@onready var _body: Polygon2D = $Visual/Body
 
 
 func _enter_tree() -> void:
-	# The arena names each player after the peer that controls it.
-	set_multiplayer_authority(str(name).to_int())
+	set_multiplayer_authority(name.to_int())
 
 
 func _ready() -> void:
 	InputActions.ensure_defaults()
+	if get_multiplayer_authority() != HOST_PEER_ID:
+		_body.color = stats.guest_color
 
 
 func _physics_process(delta: float) -> void:
@@ -70,13 +69,13 @@ func _shoot() -> void:
 	else:
 		spawn_offset = Vector2(stats.muzzle_offset.x * _facing, stats.muzzle_offset.y)
 
-	_spawn_bullet.rpc(global_position + spawn_offset, direction)
+	_fire.rpc(global_position + spawn_offset, direction)
 
 
-## Creates the bullet on every peer, so both players see the same shot.
+## Creates the shot on every peer, so each screen shows it.
 @rpc("authority", "call_local", "reliable")
-func _spawn_bullet(spawn_position: Vector2, direction: Vector2) -> void:
+func _fire(origin: Vector2, direction: Vector2) -> void:
 	var bullet: Bullet = BULLET_SCENE.instantiate() as Bullet
 	bullet.setup(direction, stats.bullet_speed)
-	projectile_parent.add_child(bullet)
-	bullet.global_position = spawn_position
+	get_parent().add_child(bullet)
+	bullet.global_position = origin

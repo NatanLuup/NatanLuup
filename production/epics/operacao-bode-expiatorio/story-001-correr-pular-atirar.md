@@ -77,7 +77,7 @@
 **Story Type**: Visual/Feel
 **Required evidence**: a retained screenshot in `production/qa/evidence/` + sign-off in `production/qa/evidence/correr-pular-atirar-evidence.md` (not waived at `qa.level: minimal`)
 
-**Status**: [ ] Not yet created
+**Status**: [x] Created: `production/qa/evidence/story-001-correr-pular-atirar-evidence.md`
 
 ---
 
@@ -86,11 +86,10 @@
 - Depends on: None
 - Unlocks: `production/epics/operacao-bode-expiatorio/story-002-coop-online.md`, `production/epics/operacao-bode-expiatorio/story-003-inimigos.md`
 
----
-
 ## Completion Notes
 **Completed**: 2026-11-09
-**Criteria**: 7/7 accepted by the developer (AC-3 shooting asserted without a screenshot of bullets; AC-5 tested on keyboard only, gamepad untested; AC-7 screenshot shows the player, not a shot in flight)
-**Deviations**: Closed by the developer's choice ("Close anyway") with the AC-3/AC-5/AC-7 gaps above
-**Test Evidence**: `production/qa/evidence/story-001-correr-pular-atirar/arena-parado.png`, sign-off in `production/qa/evidence/story-001-correr-pular-atirar-evidence.md`
-**Reviewed by**: self, no independent review
+**Criteria**: 7/7 passing (gamepad verified with simulated events; feel deferred to a human playtest)
+**Deviations**: ADVISORY: `_STICK_DEADZONE` is a constant in `src/core/input_actions.gd`, not in a data file. Scope not checked: this copy has no git repository
+**Test Evidence**: `production/qa/evidence/story-001-correr-pular-atirar-evidence.md`
+**Run result**: OBSERVED: character on the ground firing right and up inside the frame, `production/qa/evidence/story-001-correr-pular-atirar/`
+**Reviewed by**: self, no independent review (QL-TEST-COVERAGE and LP-CODE-REVIEW skipped, Solo mode)

@@ -1,7 +1,7 @@
 # Story 002: Co-op online para 2 jogadores
 
 > **Epic**: Operação Bode Expiatório
-> **Status**: In Progress
+> **Status**: Complete
 > **Layer**: Foundation
 > **Type**: Integration
 > **Estimate**: L
@@ -53,16 +53,17 @@
 
 ## Files
 
-- `src/networking/network_session.gd`
 - `src/networking/lobby.gd`
 - `src/networking/lobby.tscn`
-- `src/levels/test_arena.gd`
-- `src/levels/test_arena.tscn` (players now spawned by the host)
-- `src/gameplay/player/player.gd` (authority, bullets via RPC)
-- `src/gameplay/player/player.tscn` (MultiplayerSynchronizer)
-- `project.godot` (main scene is now the lobby)
-
----
+- `src/networking/network_manager.gd`
+- `src/networking/network_config.gd`
+- `assets/data/network_config.tres`
+- `src/gameplay/player/player.gd`
+- `src/gameplay/player/player.tscn`
+- `src/gameplay/player/player_stats.gd`
+- `assets/data/player_stats.tres`
+- `src/levels/test_arena.tscn`
+- `production/qa/playtest-coop-online.md`
 
 ## QA Test Cases
 
@@ -75,7 +76,7 @@
 **Story Type**: Integration
 **Required evidence**: `tests/integration/networking/coop_online_test.gd` OR playtest doc (tests advisory at `qa.level: minimal`)
 
-**Status**: [ ] Not yet created
+**Status**: [x] Created: `production/qa/playtest-coop-online.md`
 
 ---
 
@@ -83,3 +84,11 @@
 
 - Depends on: `production/epics/operacao-bode-expiatorio/story-001-correr-pular-atirar.md`
 - Unlocks: `production/epics/operacao-bode-expiatorio/story-004-reviver.md`
+
+## Completion Notes
+**Completed**: 2026-11-09
+**Criteria**: 6/6 passing (two instances over 127.0.0.1; internet between two PCs not tested)
+**Deviations**: ADVISORY: the brief's "código" is the host's IP for now, relay deferred. ADVISORY: `.claude/rules/network-code.md` not fully met: each player owns its position with no host validation, no message versioning and no interpolation; Story 003 damage must be decided by the host. ADVISORY: player-facing strings live in `src/networking/lobby.gd`, not in localization files. Scope not checked: this copy has no git repository
+**Test Evidence**: `production/qa/playtest-coop-online.md` (automated test waived at qa.level minimal)
+**Run result**: OBSERVED: both players, movement, jumps, shots and disconnect notices on both screens, `production/qa/evidence/story-002-coop-online/`
+**Reviewed by**: self, no independent review (QL-TEST-COVERAGE and LP-CODE-REVIEW skipped, Solo mode)
